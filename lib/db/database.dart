@@ -38,7 +38,7 @@ class DatabaseHandler {
     return queryResult.map((e) => User.fromMap(e)).toList();
   }
 
-//get one user
+//get user
   Future<User> authification(User user, context) async {
     final db = await initializeDB();
     User emptyUuser = new User(id: 0, username: '', password: '');
@@ -48,13 +48,8 @@ class DatabaseHandler {
       whereArgs: [user.username],
     );
     if (maps.isNotEmpty) {
-      if (user.password != User.fromMap(maps.first).password) {
-        Outils.errorLogin(context, "Identifiant ou mot de passe incorrect!");
-        return emptyUuser;
-      }
       return User.fromMap(maps.first);
     } else {
-      Outils.errorLogin(context, "Identifiant ou mot de passe incorrect!");
       return emptyUuser;
     }
   }
