@@ -1,3 +1,4 @@
+import 'package:findmehouse_test/page/connexion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFFF8F9FA),
       ),
       initialRoute: "/",
-      routes: {},
+      routes: {
+        "/": (context) {
+          return Connexion();
+        },
+      },
     );
   }
 }
