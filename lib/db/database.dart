@@ -1,4 +1,5 @@
 import 'package:findmehouse_test/modele/user.dart';
+import 'package:findmehouse_test/services/outils.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -25,8 +26,36 @@ class DatabaseHandler {
     int result = 0;
     final Database db = await initializeDB();
     for (var user in users) {
-      result = await db.insert('users', user.toMap());
+      result = await db.insert(userTable, user.toMap());
     }
     return result;
+  }
+
+//get list of users
+  Future<List<User>> retrieveUsers() async {
+    final Database db = await initializeDB();
+    final List<Map<String, Object?>> queryResult = await db.query(userTable);
+    return queryResult.map((e) => User.fromMap(e)).toList();
+  }
+
+//get one user
+  Future<User> authification(User user, context) async {
+    final db = await initializeDB();
+    User emptyUuser = new User(id: 0, username: '', password: '');
+    final maps = await db.query(
+      userTable,
+      where: "${UserFields.username} = ?",
+      whereArgs: [user.username],
+    );
+    if (maps.isNotEmpty) {
+      if (user.password != User.fromMap(maps.first).password) {
+        Outils.errorLogin(context, "Identifiant ou mot de passe incorrect!");
+        return emptyUuser;
+      }
+      return User.fromMap(maps.first);
+    } else {
+      Outils.errorLogin(context, "Identifiant ou mot de passe incorrect!");
+      return emptyUuser;
+    }
   }
 }

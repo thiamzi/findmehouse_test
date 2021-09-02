@@ -1,5 +1,7 @@
+import 'package:findmehouse_test/db/database.dart';
+import 'package:findmehouse_test/modele/user.dart';
+import 'package:findmehouse_test/services/userService.dart';
 import 'package:flutter/material.dart';
-//import 'package:gestion_bibliotheque/services/authService.dart';
 
 class Connexion extends StatefulWidget {
   Connexion({Key? key, this.title}) : super(key: key);
@@ -39,17 +41,23 @@ class ConnexionFormState extends State<ConnexionForm> {
   final username = TextEditingController();
   final password = TextEditingController();
 
+  late DatabaseHandler handler;
+
   @override
   void initState() {
     super.initState();
+    this.handler = DatabaseHandler();
+    this.handler.initializeDB().whenComplete(() async {
+      await this.addUsers();
+      setState(() {});
+    });
   }
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    username.dispose();
-    password.dispose();
-    super.dispose();
+  Future<int> addUsers() async {
+    User firstUser = User(username: "rene", password: "12345678");
+    User secondUser = User(username: "augustin", password: "12345678");
+    List<User> listOfUsers = [firstUser, secondUser];
+    return await this.handler.insertUser(listOfUsers);
   }
 
   @override
@@ -57,7 +65,7 @@ class ConnexionFormState extends State<ConnexionForm> {
     return Form(
       key: _formKey,
       child: ListView(
-        padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+        padding: EdgeInsets.fromLTRB(30, 100, 30, 30),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +76,7 @@ class ConnexionFormState extends State<ConnexionForm> {
               Padding(
                 padding: EdgeInsets.only(top: 50),
                 child: Text(
-                  "S'idenfier au compte pro",
+                  "S'identifier au compte pro",
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 25,
@@ -83,7 +91,7 @@ class ConnexionFormState extends State<ConnexionForm> {
                     keyboardType: TextInputType.text,
                     controller: username,
                     validator: (String? value) {
-                      if (value == null) {
+                      if (value == '' || value == null) {
                         return "Champ requis";
                       }
                       return null;
@@ -108,7 +116,7 @@ class ConnexionFormState extends State<ConnexionForm> {
                     controller: password,
                     obscureText: true,
                     validator: (String? value) {
-                      if (value == null) {
+                      if (value == '' || value == null) {
                         return "Champ requis";
                       }
                       return null;
@@ -129,7 +137,14 @@ class ConnexionFormState extends State<ConnexionForm> {
               Padding(
                 padding: EdgeInsets.only(top: 70),
                 child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      UserService().handleSubmitted(
+                          new User(
+                              username: username.text, password: password.text),
+                          context);
+                    } else {}
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

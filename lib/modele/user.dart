@@ -1,4 +1,4 @@
-final userTable = 'user';
+final userTable = 'users';
 
 class UserFields {
   static final String id = '_id';
@@ -18,11 +18,11 @@ class User {
   });
 
   User.fromMap(Map<String, dynamic> res)
-      : id = res["id"],
+      : id = res["_id"],
         username = res["username"],
-        password = res["password"];
+        password = res["password"].toString();
 
   Map<String, Object?> toMap() {
-    return {'id': id, 'username': username, 'password': password};
+    return {'_id': id, 'username': username, 'password': password};
   }
 }
