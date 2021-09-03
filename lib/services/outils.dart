@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Outils {
-  static AppBar buildAppBar(bottom, [Widget? iconb3]) {
+  static AppBar buildAppBar([IconButton? iconb]) {
     return AppBar(
-      leading: iconb3 == null ? null : iconb3,
-      elevation: 2,
-      backgroundColor: Color.fromRGBO(79, 84, 103, 1),
-      title: Row(mainAxisAlignment: MainAxisAlignment.center, children: []),
+      elevation: 0,
+      toolbarHeight: 70,
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      iconTheme: IconThemeData(color: Color.fromRGBO(22, 101, 174, 1)),
+      title: Padding(
+        padding: EdgeInsets.only(top: 45),
+        child: Image.asset(
+          'images/logo.png',
+          height: 40,
+        ),
+      ),
       actions: <Widget>[
-        IconButton(
-            icon: Icon(
-              Icons.info_outline,
-              size: 25,
-              color: Colors.white,
-            ),
-            onPressed: null),
+        if (iconb != null) iconb,
       ],
-      bottom: bottom,
     );
   }
 
@@ -35,5 +36,24 @@ class Outils {
         style: TextStyle(fontSize: 20),
       ),
     ));
+  }
+
+  static ElevatedButton button(String text, function()) {
+    return ElevatedButton(
+        onPressed: function,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          )),
+          minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Color.fromRGBO(50, 177, 8, 1)),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        ));
   }
 }

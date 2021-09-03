@@ -1,5 +1,6 @@
 import 'package:findmehouse_test/db/database.dart';
 import 'package:findmehouse_test/modele/user.dart';
+import 'package:findmehouse_test/services/outils.dart';
 import 'package:findmehouse_test/services/userService.dart';
 import 'package:flutter/material.dart';
 
@@ -136,31 +137,20 @@ class ConnexionFormState extends State<ConnexionForm> {
                   )),
               Padding(
                 padding: EdgeInsets.only(top: 70),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      UserService().handleSubmitted(
+                child: Outils.button(
+                  "Valider",
+                  () => {
+                    if (_formKey.currentState!.validate())
+                      {
+                        UserService().handleSubmitted(
                           new User(
                               username: username.text, password: password.text),
-                          context);
-                    } else {}
+                          context,
+                        )
+                      }
+                    else
+                      {}
                   },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    )),
-                    minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromRGBO(50, 177, 8, 1)),
-                  ),
-                  child: Text(
-                    "Valider",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
                 ),
               )
             ],
