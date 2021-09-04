@@ -17,6 +17,8 @@ class _GetLinkPageState extends State<GetLinkPage> {
 
   String link = "http/Infos.house/sen/aid/adresse";
 
+  String copiedlink = "";
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +56,7 @@ class _GetLinkPageState extends State<GetLinkPage> {
                         color: Color.fromRGBO(50, 177, 8, 1),
                       ),
                       onPressed: () {
+                        copiedlink = link;
                         FlutterClipboard.copy(link).then((value) =>
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(seconds: 1),
@@ -72,7 +75,7 @@ class _GetLinkPageState extends State<GetLinkPage> {
           Outils.button(
             "Retour",
             () => {
-              Navigator.pushNamed(context, "/home", arguments: link),
+              Navigator.pushNamed(context, "/home", arguments: copiedlink),
             },
           )
         ]),
