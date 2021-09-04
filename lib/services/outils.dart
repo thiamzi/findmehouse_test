@@ -56,4 +56,38 @@ class Outils {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ));
   }
+
+  static Container buildCardButton(
+      Widget icon, String text1, String text2, context,
+      [function()?]) {
+    return Container(
+      height: 115,
+      width: 100,
+      child: Card(
+        elevation: 3,
+        margin: EdgeInsets.only(bottom: 20),
+        shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: GestureDetector(
+          onTap: function == null ? null : function,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                icon,
+                Text(text1,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
+                Text(text2,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black))
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
