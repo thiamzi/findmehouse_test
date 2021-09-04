@@ -49,15 +49,17 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Outils.buildCardButton(
-                          Image.asset("images/search_qr.png"),
-                          'Scanner',
-                          "QR code",
-                          context, () {
-                        Navigator.pushNamed(
-                          context,
-                          "/scanpage",
-                        );
-                      }),
+                        Image.asset("images/search_qr.png"),
+                        'Scanner',
+                        "QR code",
+                        context,
+                        () {
+                          Navigator.pushNamed(
+                            context,
+                            "/scanpage",
+                          );
+                        },
+                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
                         child: Text(

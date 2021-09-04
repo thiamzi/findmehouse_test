@@ -1,4 +1,5 @@
 import 'package:findmehouse_test/page/connexion.dart';
+import 'package:findmehouse_test/page/getLinkPage.dart';
 import 'package:findmehouse_test/page/home.dart';
 import 'package:findmehouse_test/page/scanPage.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         },
         "/scanpage": (context) {
           return ScanPage();
+        },
+        "/getlinkPage": (context) {
+          return GetLinkPage();
         },
       },
     );

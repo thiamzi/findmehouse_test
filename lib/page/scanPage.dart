@@ -81,7 +81,12 @@ class _ScanPageState extends State<ScanPage> {
                   ),
                   GestureDetector(
                     child: Image.asset("images/qr_code.png"),
-                    onTap: null,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        "/getlinkPage",
+                      );
+                    },
                   )
                 ],
               )
