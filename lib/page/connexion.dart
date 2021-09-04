@@ -65,97 +65,95 @@ class ConnexionFormState extends State<ConnexionForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: ListView(
+      child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(30, 100, 30, 30),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                child: Image.asset("images/img.png"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Text(
-                  "S'identifier au compte pro",
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(22, 101, 174, 1),
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              child: Image.asset("images/img.png"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Text(
+                "S'identifier au compte pro",
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(22, 101, 174, 1),
                 ),
               ),
-              Padding(
-                  padding: EdgeInsets.only(top: 40),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: username,
-                    validator: (String? value) {
-                      if (value == '' || value == null) {
-                        return "Champ requis";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Identifiant',
-                      labelStyle: TextStyle(
-                          color: Color.fromRGBO(22, 101, 174, 1),
-                          fontWeight: FontWeight.bold),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(22, 101, 174, 1),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  )),
-              Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: password,
-                    obscureText: true,
-                    validator: (String? value) {
-                      if (value == '' || value == null) {
-                        return "Champ requis";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Mot de passe',
-                      labelStyle: TextStyle(
-                          color: Color.fromRGBO(22, 101, 174, 1),
-                          fontWeight: FontWeight.bold),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(22, 101, 174, 1),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  )),
-              Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Outils.button(
-                  "Valider",
-                  () => {
-                    if (_formKey.currentState!.validate())
-                      {
-                        UserService().handleSubmitted(
-                          new User(
-                              username: username.text, password: password.text),
-                          context,
-                        )
-                      }
-                    else
-                      {}
+            ),
+            Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: username,
+                  validator: (String? value) {
+                    if (value == '' || value == null) {
+                      return "Champ requis";
+                    }
+                    return null;
                   },
-                ),
-              )
-            ],
-          ),
-        ],
+                  decoration: InputDecoration(
+                    labelText: 'Identifiant',
+                    labelStyle: TextStyle(
+                        color: Color.fromRGBO(22, 101, 174, 1),
+                        fontWeight: FontWeight.bold),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(22, 101, 174, 1),
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                )),
+            Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: password,
+                  obscureText: true,
+                  validator: (String? value) {
+                    if (value == '' || value == null) {
+                      return "Champ requis";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Mot de passe',
+                    labelStyle: TextStyle(
+                        color: Color.fromRGBO(22, 101, 174, 1),
+                        fontWeight: FontWeight.bold),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(22, 101, 174, 1),
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                )),
+            Padding(
+              padding: EdgeInsets.only(top: 70),
+              child: Outils.button(
+                "Valider",
+                () => {
+                  if (_formKey.currentState!.validate())
+                    {
+                      UserService().handleSubmitted(
+                        new User(
+                            username: username.text, password: password.text),
+                        context,
+                      )
+                    }
+                  else
+                    {}
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

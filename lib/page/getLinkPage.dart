@@ -72,10 +72,7 @@ class _GetLinkPageState extends State<GetLinkPage> {
           Outils.button(
             "Retour",
             () => {
-              Navigator.pushNamed(
-                context,
-                "/home",
-              ),
+              Navigator.pushNamed(context, "/home", arguments: link),
             },
           )
         ]),

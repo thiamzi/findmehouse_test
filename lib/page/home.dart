@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 5),
                       child: Text(
                           "Enter l'identifiant l'aid de l'adresse en copiant le lien present dans le QRCode sur la plaque",
                           textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class ClassForm extends StatefulWidget {
 
 class ClassFormState extends State<ClassForm> {
   final _formKey = GlobalKey<FormState>();
-  final link = TextEditingController();
+  final linkControl = TextEditingController();
 
   @override
   void initState() {
@@ -109,6 +109,13 @@ class ClassFormState extends State<ClassForm> {
 
   @override
   Widget build(BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      setState(() {
+        linkControl.text =
+            ModalRoute.of(context)!.settings.arguments.toString();
+      });
+    }
+
     return Form(
       key: _formKey,
       child: Column(
@@ -116,14 +123,15 @@ class ClassFormState extends State<ClassForm> {
           Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: TextFormField(
-              controller: link,
+              controller: linkControl,
               validator: (String? value) {
                 if (value == '' || value == null) {
-                  return "Veuillez renseigner le lien";
+                  return "Veuillez d'abord copier le lien sur la plaque";
                 }
                 return null;
               },
               textAlign: TextAlign.center,
+              readOnly: true,
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 labelText: 'Exemple : Infos.house/sen/aid/adresse',
@@ -156,6 +164,7 @@ class ClassFormState extends State<ClassForm> {
               () => {
                 if (_formKey.currentState!.validate())
                   {
+                    linkControl.clear(),
                     Navigator.pushNamed(
                       context,
                       "/adressPage",
