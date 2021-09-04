@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         "/home": (context) {
           return Home();
         },
+        "/scanpage": (context) {
+          return ScanPage();
+        },
       },
     );
   }
