@@ -74,7 +74,7 @@ class _GetLinkPageState extends State<GetLinkPage> {
             () => {
               Navigator.pushNamed(
                 context,
-                "home",
+                "/home",
               ),
             },
           )
