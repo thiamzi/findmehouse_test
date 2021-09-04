@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(backgroundColor: Colors.white),
       initialRoute: "/",
       routes: {
-        // "/": (context) {
-        //   return Connexion();
-        // },
         "/": (context) {
+          return Connexion();
+        },
+        "/home": (context) {
           return Home();
         },
         "/scanpage": (context) {
