@@ -22,100 +22,147 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
-        backgroundColor: Colors.white,
-        appBar: Outils.buildAppBar(
-          IconButton(
-              icon: FaIcon(
-                FontAwesomeIcons.solidTimesCircle,
-                size: 20,
-                color: Colors.red,
+      key: scaffoldKey,
+      backgroundColor: Colors.white,
+      appBar: Outils.buildAppBar(
+        IconButton(
+            icon: FaIcon(
+              FontAwesomeIcons.solidTimesCircle,
+              size: 20,
+              color: Colors.red,
+            ),
+            onPressed: null),
+      ),
+      drawer: Outils.builDrawer(context),
+      body: Center(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 40),
+                child: Image.asset("images/profile.png"),
               ),
-              onPressed: null),
-        ),
-        drawer: Outils.builDrawer(context),
-        body: Center(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 40),
-                  child: Image.asset("images/profile.png"),
-                ),
-                Padding(
-                  padding: EdgeInsets.zero,
-                  child: Column(
-                    children: [
-                      Outils.buildCardButton(
-                        Image.asset("images/search_qr.png"),
-                        'Scanner',
-                        "QR code",
-                        context,
-                        () {
-                          Navigator.pushNamed(
-                            context,
-                            "/scanpage",
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                        child: Text(
-                            "Enter l'identifiant l'aid de l'adresse en copiant le lien present dans le QRCode sur la plaque",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.black)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: TextFormField(
+              Padding(
+                padding: EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    Outils.buildCardButton(
+                      Image.asset("images/search_qr.png"),
+                      'Scanner',
+                      "QR code",
+                      context,
+                      () {
+                        Navigator.pushNamed(
+                          context,
+                          "/scanpage",
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                      child: Text(
+                          "Enter l'identifiant l'aid de l'adresse en copiant le lien present dans le QRCode sur la plaque",
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            labelText: 'Exemple : Infos.house/sen/aid/adresse',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(50, 177, 8, 1),
-                                  width: 1),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(50, 177, 8, 1),
-                                  width: 1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          style:
-                              TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Outils.button(
-                          "Valider",
-                          () => {},
-                        ),
-                      ),
-                    ],
+                          style: TextStyle(color: Colors.black)),
+                    ),
+                    ClassForm()
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Avec "),
+                    Text(
+                      "FindMe",
+                      style: TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
+                    ),
+                    Text(", une adresse pour tous")
+                  ],
+                ),
+              )
+            ]),
+      ),
+    );
+  }
+}
+
+class ClassForm extends StatefulWidget {
+  @override
+  ClassFormState createState() {
+    return ClassFormState();
+  }
+}
+
+class ClassFormState extends State<ClassForm> {
+  final _formKey = GlobalKey<FormState>();
+  final link = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: TextFormField(
+                controller: link,
+                validator: (String? value) {
+                  if (value == '' || value == null) {
+                    return "Veuillez renseigner le lien";
+                  }
+                  return null;
+                },
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  labelText: 'Exemple : Infos.house/sen/aid/adresse',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                        color: Color.fromRGBO(50, 177, 8, 1), width: 1),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromRGBO(50, 177, 8, 1), width: 1),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Avec "),
-                      Text(
-                        "FindMe",
-                        style: TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
-                      ),
-                      Text(", une adresse pour tous")
-                    ],
-                  ),
-                )
-              ]),
+                style: TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Outils.button(
+                "Valider",
+                () => {
+                  if (_formKey.currentState!.validate())
+                    {
+                      Navigator.pushNamed(
+                        context,
+                        "/profilePage",
+                      )
+                    }
+                  else
+                    {}
+                },
+              ),
+            ),
+          ],
         ));
   }
 }
