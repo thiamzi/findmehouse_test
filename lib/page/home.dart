@@ -110,59 +110,64 @@ class ClassFormState extends State<ClassForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: TextFormField(
-                controller: link,
-                validator: (String? value) {
-                  if (value == '' || value == null) {
-                    return "Veuillez renseigner le lien";
-                  }
-                  return null;
-                },
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  labelText: 'Exemple : Infos.house/sen/aid/adresse',
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                        color: Color.fromRGBO(50, 177, 8, 1), width: 1),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color.fromRGBO(50, 177, 8, 1), width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: TextFormField(
+              controller: link,
+              validator: (String? value) {
+                if (value == '' || value == null) {
+                  return "Veuillez renseigner le lien";
+                }
+                return null;
+              },
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                labelText: 'Exemple : Infos.house/sen/aid/adresse',
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(50, 177, 8, 1), width: 1),
                 ),
-                style: TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(50, 177, 8, 1), width: 1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
+              style: TextStyle(color: Color.fromRGBO(50, 177, 8, 1)),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Outils.button(
-                "Valider",
-                () => {
-                  if (_formKey.currentState!.validate())
-                    {
-                      Navigator.pushNamed(
-                        context,
-                        "/profilePage",
-                      )
-                    }
-                  else
-                    {}
-                },
-              ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Outils.button(
+              "Valider",
+              () => {
+                if (_formKey.currentState!.validate())
+                  {
+                    Navigator.pushNamed(
+                      context,
+                      "/adressPage",
+                    )
+                  }
+                else
+                  {}
+              },
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -30,7 +30,7 @@ class _GetLinkPageState extends State<GetLinkPage> {
       body: Center(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
-            padding: EdgeInsets.only(top: 40),
+            padding: EdgeInsets.only(top: 70),
             child: Image.asset("images/logo.png"),
           ),
           Container(

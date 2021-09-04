@@ -1,7 +1,7 @@
+import 'package:findmehouse_test/page/adressPage.dart';
 import 'package:findmehouse_test/page/connexion.dart';
 import 'package:findmehouse_test/page/getLinkPage.dart';
 import 'package:findmehouse_test/page/home.dart';
-import 'package:findmehouse_test/page/profilePage.dart';
 import 'package:findmehouse_test/page/scanPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         "/getlinkPage": (context) {
           return GetLinkPage();
         },
-        "/profilePage": (context) {
-          return ProfilePage();
+        "/adressPage": (context) {
+          return AdressPage();
         },
       },
     );

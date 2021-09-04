@@ -2,16 +2,16 @@ import 'package:findmehouse_test/services/outils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key, this.title}) : super(key: key);
+class AdressPage extends StatefulWidget {
+  AdressPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _AdressPageState createState() => _AdressPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _AdressPageState extends State<AdressPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
